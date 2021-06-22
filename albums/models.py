@@ -17,3 +17,14 @@ class Album(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Artist(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __repr__(self):
+        return f"<Artist name={self.name}>"
+
+    def __str__(self):
+        return self.name
