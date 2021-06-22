@@ -8,6 +8,6 @@
 <a href={% url 'list_albums' %}>Back to all albums</a>
 <div class="mt2 f6 lh-copy">
   <p class="mt5 ml5 album_title f3 fw6 db dark-pink">{{ album.title }}</p>
-  <p class="ml5 f5 gray">{{ album.artist_name }}</p>
+  <p class="ml5 f5 gray">{{ album.artist.name }}</p>
 </div>
 {% endblock content %}

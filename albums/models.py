@@ -9,11 +9,13 @@ class User(AbstractUser):
 
 class Album(models.Model):
     title = models.CharField(max_length=255)
-    artist_name = models.CharField(max_length=255)
+    artist = models.ForeignKey(
+        "Artist", on_delete=models.CASCADE, related_name="albums"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __repr__(self):
-        return f"<Album title={self.title} artist_name={self.artist_name}>"
+        return f"<Album title={self.title} >"
 
     def __str__(self):
         return self.title
