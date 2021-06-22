@@ -19,7 +19,8 @@ from django.urls import path, include
 from albums import views as album_views
 
 urlpatterns = [
-    path("", album_views.list_albums, name="home"),
+    path("", album_views.homepage, name="home"),
+    path('accounts/', include('registration.backends.default.urls')),
     path("albums/", album_views.list_albums, name="list_albums"),
     path("albums/new", album_views.add_album, name="add_album"),
     path("albums/<int:pk>", album_views.show_album, name="show_album"),

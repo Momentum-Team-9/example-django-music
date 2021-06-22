@@ -1,16 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .models import Album
 from .forms import AlbumForm
 
 
+def homepage(request):
+    # show a homepage
+    return render(request, "albums/homepage.html")
+
+
+@login_required # this is a decorator or function that will redirect you to login page
 def list_albums(request):
     albums = Album.objects.all().order_by("title")
     return render(request, "albums/list_albums.html", {"albums": albums})
 
 
 def add_album(request):
-    breakpoint()
     if request.method == "POST":
         form = AlbumForm(data=request.POST)
         if form.is_valid():
