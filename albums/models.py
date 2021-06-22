@@ -30,3 +30,14 @@ class Artist(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Genre(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=75)
+
+    def __repr__(self):
+        return f"<Genre name={self.name}>"
+
+    def __str__(self):
+        return self.name
