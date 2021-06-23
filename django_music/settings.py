@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
 ACCOUNT_ACTIVATION_DAYS = 5
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -114,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+INTERNAL_IPS = [
+    "localhost",
+    "127.0.0.1",
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
