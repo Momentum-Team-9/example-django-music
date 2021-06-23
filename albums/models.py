@@ -12,6 +12,7 @@ class Album(models.Model):
     artist = models.ForeignKey(
         "Artist", on_delete=models.CASCADE, related_name="albums"
     )
+    genres = models.ManyToManyField("Genre", related_name="albums")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __repr__(self):
