@@ -27,6 +27,7 @@ urlpatterns = [
     path("albums/<int:pk>/edit", album_views.edit_album, name="edit_album"),
     path("albums/<int:pk>/delete", album_views.delete_album, name="delete_album"),
     path("admin/", admin.site.urls),
+    path("genres/<slug:slug>", album_views.show_genre, name="show_genre"),
 ]
 
 if settings.DEBUG:
