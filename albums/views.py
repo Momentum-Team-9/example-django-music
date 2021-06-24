@@ -65,3 +65,15 @@ def show_genre(request, slug):
     albums = genre.albums.all()
 
     return render(request, "albums/show_genre.html", {"genre": genre, "albums": albums})
+
+
+# This view should be login_required
+def mark_favorite(request, album_pk):
+    # get the user
+    user = request.user
+    # get the album
+    album = get_object_or_404(Album, pk=album_pk)
+    # add favorited by user to album
+    album.favorited_by.add(user)
+
+    return redirect("show_album", pk=album_pk)

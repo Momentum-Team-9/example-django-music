@@ -2,12 +2,17 @@
 
 {% block content %}
 
-<!-- <img class="db ba b--black-10" / alt="Frank Ocean Blonde Album Cover" src="https://s3-us-west-1.amazonaws.com/tachyonsio/img/Blonde-Frank_Ocean.jpeg"> -->
 <h2>Album Detail</h2>
 
 <a href={% url 'list_albums' %}>Back to all albums</a>
-<div class="mt2 f6 lh-copy">
-  <p class="mt5 ml5 album_title f3 fw6 db dark-pink">{{ album.title }}</p>
-  <p class="ml5 f5 gray">{{ album.artist.name }}</p>
+<div class="ma5 pa2 f6 lh-copy ba b--light-silver br2 measure-narrow">
+  <p class="album_title f3 fw6 db dark-pink">{{ album.title }}</p>
+  <p class="f5 gray">{{ album.artist.name }}</p>
+  {% if album in user.fav_albums.all %}
+    <a href={% url 'mark_favorite' album_pk=album.pk %}><i class="fas fa-heart hot-pink"></i></a>
+  {% else %}
+    <a href={% url 'mark_favorite' album_pk=album.pk %}><i class="far fa-heart"></i></a>
+  {% endif %}
+
 </div>
 {% endblock content %}
