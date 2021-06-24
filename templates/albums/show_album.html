@@ -9,9 +9,9 @@
   <p class="album_title f3 fw6 db dark-pink">{{ album.title }}</p>
   <p class="f5 gray">{{ album.artist.name }}</p>
   {% if album in user.fav_albums.all %}
-    <a href={% url 'mark_favorite' album_pk=album.pk %}><i class="fas fa-heart hot-pink"></i></a>
+    <a href={% url 'toggle_favorite' album_pk=album.pk %}><i class="fas fa-heart hot-pink f3"></i></a>
   {% else %}
-    <a href={% url 'mark_favorite' album_pk=album.pk %}><i class="far fa-heart"></i></a>
+    <a href={% url 'toggle_favorite' album_pk=album.pk %}><i class="far fa-heart hot-pink f3"></i></a>
   {% endif %}
 
 </div>
