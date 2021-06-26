@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1> {{ genre.name }} </h1>
-{% for album in albums  %}
+{% for album in albums %}
 <p>{{ album.title }}</p>
 <p>{{ album.artist.name }}
 {% endfor %}
