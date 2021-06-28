@@ -37,7 +37,10 @@ def add_album(request):
 @login_required
 def show_album(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    return render(request, "albums/show_album.html", {"album": album})
+    fav_albums = request.user.fav_albums.all()
+    return render(
+        request, "albums/show_album.html", {"album": album, "fav_albums": fav_albums}
+    )
 
 
 @login_required

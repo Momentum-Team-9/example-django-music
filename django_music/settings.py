@@ -52,10 +52,6 @@ INSTALLED_APPS = [
     "albums",
 ]
 
-ACCOUNT_ACTIVATION_DAYS = 5
-REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = "/"
-
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -144,3 +140,7 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "albums.User"
+
+ACCOUNT_ACTIVATION_DAYS = 5
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = "/"
