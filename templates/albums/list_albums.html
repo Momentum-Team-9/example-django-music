@@ -14,6 +14,9 @@
     <button type="submit" class="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-gray">Search by title</button>
   </form>
 </section>
+<div class="back-button">
+  <a href={% url "list_albums" %}>Back to all albums</a>
+</div>
 <section class="album-list">
   {% for album in albums %}
   <div class="album mv4 pa3 br1 measure-narrow ba b--light-silver">
