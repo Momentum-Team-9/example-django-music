@@ -91,3 +91,10 @@ def toggle_favorite(request, album_pk):
         album.favorited_by.add(user)
 
     return redirect("show_album", pk=album_pk)
+
+
+def search_by_title(request):
+    query = request.GET.get("q")
+    results = Album.objects.filter(title__icontains=query)
+
+    return render(request, "albums/list_albums.html", {"albums": results})
