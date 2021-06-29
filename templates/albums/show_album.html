@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block javascript %}
+<script src={% static 'js/toggle_fav.js' %} defer></script>
+{% endblock %}
 
 {% block content %}
 
