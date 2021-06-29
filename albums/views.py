@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
-from .models import Album, Genre
+from .models import Album, Genre, PlayList
 from .forms import AlbumForm
 
 
@@ -98,3 +97,26 @@ def search_by_title(request):
     results = Album.objects.filter(title__icontains=query)
 
     return render(request, "albums/list_albums.html", {"albums": results})
+
+
+@login_required
+def add_to_playlist(request, playlist_pk):
+    playlist = PlayList.objects.get(pk=playlist_pk)
+
+    # check if current user owns playlist
+    if request.user is not playlist.owner:
+        print("Unauthorized!")
+        messages.add_message(
+            request, messages.ERROR, "Only the owner can add to this playlist"
+        )
+        return redirect("list_albums")
+
+    # If I make this a GET I can use a query param "album=some+album+title"
+    album_title = request.GET.get("album")
+    album = Album.objects.filter(title__iexact=album_title)
+    playlist.albums.add(album)
+    messages.add_message(
+        request, messages.SUCCESS, "Album has been added to your playlist"
+    )
+
+    return redirect("show_album")

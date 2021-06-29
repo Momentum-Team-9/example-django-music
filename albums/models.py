@@ -43,3 +43,16 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class PlayList(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="playlists")
+    albums = models.ManyToManyField(Album)
+
+    def __repr__(self):
+        return f"<PlayList name={self.name} owner_id={self.owner.id}>"
+
+    def __str__(self):
+        return self.name

@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if messages %}
-<div class="messages ba br2 b--silver bg-washed-green pa2">
+<div class="messages ba br2 b--silver bg-lightest-blue pa2 mv2">
   {% for message in messages %}
   <p{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
     {% endfor %}

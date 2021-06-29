@@ -34,6 +34,11 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("genres/<slug:slug>", album_views.show_genre, name="show_genre"),
     path("search", album_views.search_by_title, name="album_search"),
+    path(
+        "playlist/<int:playlist_pk>/add",
+        album_views.add_to_playlist,
+        name="add_to_playlist",
+    ),
 ]
 
 if settings.DEBUG:
