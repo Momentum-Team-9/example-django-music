@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import Album, Genre, PlayList
 from .forms import AlbumForm
@@ -36,9 +37,9 @@ def add_album(request):
 @login_required
 def show_album(request, pk):
     album = get_object_or_404(Album, pk=pk)
-    fav_albums = request.user.fav_albums.all()
+    favorited = request.user.fav_albums.filter(id=album.id).exists()
     return render(
-        request, "albums/show_album.html", {"album": album, "fav_albums": fav_albums}
+        request, "albums/show_album.html", {"album": album, "favorited": favorited}
     )
 
 
@@ -83,11 +84,19 @@ def toggle_favorite(request, album_pk):
     # get the album
     album = get_object_or_404(Album, pk=album_pk)
     # check to see if album is already favorited by user
-    # if it is, remove favorite
     if user.fav_albums.filter(id=album.id).exists():
+        # if it is, remove favorite
+        print("Ok, unfavorited!")
+        favorited = False
         album.favorited_by.remove(user)
     else:
+        print("Ok, favorited!")
+        favorited = True
         album.favorited_by.add(user)
+
+    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+        # response with Json that says request succeeded and whether this album is favorited or not
+        return JsonResponse({"favorited": favorited}, status=200)
 
     return redirect("show_album", pk=album_pk)
 

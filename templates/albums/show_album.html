@@ -13,11 +13,8 @@
 <div class="ma5 pa2 f6 lh-copy ba b--light-silver br2 measure-narrow">
   <p class="album_title f3 fw6 db dark-pink">{{ album.title }}</p>
   <p class="f5 gray">{{ album.artist.name }}</p>
-  {% if album in fav_albums %}
-    <a href={% url 'toggle_favorite' album_pk=album.pk %}><i class="fas fa-heart hot-pink f3"></i></a>
-  {% else %}
-    <a href={% url 'toggle_favorite' album_pk=album.pk %}><i class="far fa-heart hot-pink f3"></i></a>
-  {% endif %}
-
+  <a href={% url 'toggle_favorite' album_pk=album.pk %} class="fav-link">
+    <i class="{% if favorited %} fas {% else %} far {% endif %} fa-heart hot-pink f3"></i>
+  </a>
 </div>
 {% endblock content %}
