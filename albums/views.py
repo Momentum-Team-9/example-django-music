@@ -25,8 +25,7 @@ def add_album(request):
     if request.method == "POST":
         form = AlbumForm(data=request.POST)
         if form.is_valid():
-            album = form.save(commit=False)
-            album.save()
+            album = form.save()
             return redirect("show_album", pk=album.pk)
     else:
         form = AlbumForm()
