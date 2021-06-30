@@ -9,7 +9,7 @@
 </div>
 {% endif %}
 <section class="album-search">
-  {% include 'albums/_search_form.html' with search_url='album_search'  search_btn_text='Search by title' %}
+  {% include 'albums/_search_form.html' with search_url='search'  search_btn_text='Search albums' %}
 </section>
 <div class="back-button">
   <a href={% url "list_albums" %}>Back to all albums</a>

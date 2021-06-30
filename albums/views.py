@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.db.models import Q
 
 from .models import Album, Genre, PlayList
 from .forms import AlbumForm
@@ -101,9 +102,11 @@ def toggle_favorite(request, album_pk):
     return redirect("show_album", pk=album_pk)
 
 
-def search_by_title(request):
+def search(request):
     query = request.GET.get("q")
-    results = Album.objects.filter(title__icontains=query)
+    results = Album.objects.filter(
+        Q(title__icontains=query) | Q(artist__name__icontains=query)
+    )
 
     return render(request, "albums/list_albums.html", {"albums": results})
 
