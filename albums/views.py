@@ -5,6 +5,7 @@ from django.http import JsonResponse
 
 from .models import Album, Genre, PlayList
 from .forms import AlbumForm
+from .utils import is_ajax
 
 
 def homepage(request):
@@ -93,7 +94,7 @@ def toggle_favorite(request, album_pk):
         favorited = True
         album.favorited_by.add(user)
 
-    if request.headers.get("x-requested-with") == "XMLHttpRequest":
+    if is_ajax(request):
         # response with Json that says request succeeded and whether this album is favorited or not
         return JsonResponse({"favorited": favorited}, status=200)
 
