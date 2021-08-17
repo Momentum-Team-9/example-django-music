@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.urls import reverse
 
 class User(AbstractUser):
     def __str__(self):
@@ -37,6 +37,9 @@ class Artist(models.Model):
 class Genre(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=75)
+
+    def get_absolute_url(self):
+        return reverse("show_genre", kwargs={"slug": self.slug})
 
     def __repr__(self):
         return f"<Genre name={self.name}>"
