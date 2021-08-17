@@ -14,7 +14,7 @@ class Album(models.Model):
     )
     genres = models.ManyToManyField("Genre", related_name="albums")
     created_at = models.DateTimeField(auto_now_add=True)
-    favorited_by = models.ManyToManyField("User", related_name="fav_albums")
+    favorited_by = models.ManyToManyField("User", related_name="fav_albums", blank=True)
 
     def __repr__(self):
         return f"<Album title={self.title}>"
