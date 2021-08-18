@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Album
+from .models import Album, Genre
 from .forms import AlbumForm
 
 
@@ -10,12 +10,10 @@ def list_albums(request):
 
 
 def add_album(request):
-    breakpoint()
     if request.method == "POST":
         form = AlbumForm(data=request.POST)
         if form.is_valid():
-            album = form.save(commit=False)
-            album.save()
+            album = form.save()
             return redirect("show_album", pk=album.pk)
     else:
         form = AlbumForm()
@@ -50,3 +48,9 @@ def delete_album(request, pk):
         return redirect("list_albums")
 
     return render(request, "albums/delete_album.html", {"album": album})
+
+def show_genre(request, slug):
+    genre = get_object_or_404(Genre, slug=slug)
+    albums = genre.albums.all()
+
+    return render(request, "albums/show_genre.html", {"genre": genre, "albums": albums})
