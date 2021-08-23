@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -5,6 +6,7 @@ from django.db.models import Q
 
 from .models import Album, Genre
 from .forms import AlbumForm
+from .utils import is_ajax
 
 
 def homepage(request):
@@ -87,8 +89,13 @@ def toggle_favorite(request, album_pk):
     # if it is, remove favorite
     if user.fav_albums.filter(id=album.id).exists():
         album.favorited_by.remove(user)
+        favorited = False
     else:
         album.favorited_by.add(user)
+        favorited = True
+
+    if is_ajax(request):
+        return JsonResponse({"favorited": favorited })
 
     return redirect("show_album", pk=album_pk)
 
