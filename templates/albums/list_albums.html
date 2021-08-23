@@ -9,7 +9,10 @@
 </div>
 {% endif %}
 <section class="album-list">
-  <h1>All Albums</h1>
+  <form action={% url "album_search" %} method="GET">
+    <input type="text" name="query" />
+    <button type="submit">Search album titles</button>
+  </form>
   {% for album in albums %}
   <div class="album mv4 pa3 br1 measure-narrow ba b--light-silver">
       <a href={% url 'show_album' pk=album.pk %} class="album_title f3 fw6 db dark-pink no-underline underline-hover">{{ album.title }}</a>
